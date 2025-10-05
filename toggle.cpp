@@ -4,15 +4,18 @@
 
 Toggle::Toggle(const Rect rect, const char *texts[2]) : rect(rect), texts(texts) {
     TTF_Font *font = TTF_OpenFont("assets/standard.ttf", rect.size.h);
-    if (!font) { SDL_Log("TTF_OpenFont failed: %s", SDL_GetError()); }
-    for (int i = 0; i < 2; i++) textures[i] = {font, texts[i], {0, 0, 0, 255}};
+    for (int i = 0; i < 2; i++) textures[i].init(font, texts[i], {0, 0, 0, 255});
     TTF_CloseFont(font);
 }
 
-void Toggle::handle() {
+bool Toggle::handle() {
     touch = rect.inRange();
     down = Base::event.type == SDL_EVENT_MOUSE_BUTTON_DOWN;
-    if (Base::event.type == SDL_EVENT_MOUSE_BUTTON_UP) index = !index;
+    if (Base::event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+        index = !index;
+        return true;
+    }
+    return false;
 }
 
 void Toggle::draw() const {

@@ -49,7 +49,7 @@ struct Field final : Scene {
 
     ~Field() override { SDL_DestroyTexture(texture); }
 
-    void handle() override { toggle.handle(); }
+    void handle() override;
 
     void draw() const override;
 };

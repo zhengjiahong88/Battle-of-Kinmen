@@ -2,7 +2,7 @@
 
 #include "text_texture.h"
 
-TextTexture::TextTexture(TTF_Font* font, const char* text, const SDL_Color color) {
+void TextTexture::init(TTF_Font* font, const char* text, const SDL_Color color) {
     SDL_Surface* surface = TTF_RenderText_Blended(font, text, 0, color);
     texture = SDL_CreateTextureFromSurface(Base::renderer, surface);
     SDL_DestroySurface(surface);

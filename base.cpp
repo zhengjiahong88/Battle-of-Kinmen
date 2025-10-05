@@ -6,7 +6,6 @@ Base::Base() {
     TTF_Init();
     window = SDL_CreateWindow("金門保衛戰", WIDTH, HEIGHT, 0);
     renderer = SDL_CreateRenderer(window, nullptr);
-    run = true;
 }
 
 Base::~Base() {

@@ -5,8 +5,8 @@
 
 Buttons::Buttons(const Rect rect, const Uint16 gap, const Uint8 num, Button* buttons[]) : rect(rect), gap(gap), num(num), buttons(buttons) {
     textures = new TextTexture[num];
-    TTF_Font* font = TTF_OpenFont("standard.ttf", rect.size.h);
-    for (int i = 0; i < num; i++) textures[i] = {font, buttons[i]->name, {0, 0, 0, 255}};
+    TTF_Font* font = TTF_OpenFont("assets/standard.ttf", rect.size.h);
+    for (int i = 0; i < num; i++) textures[i].init(font, buttons[i]->name, {0, 0, 0, 255});
     TTF_CloseFont(font);
 }
 

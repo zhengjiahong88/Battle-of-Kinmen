@@ -14,7 +14,7 @@ struct Toggle {
 
     Toggle(Rect rect, const char *texts[2]);
 
-    void handle();
+    bool handle();
 
     void draw() const;
 };

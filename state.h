@@ -2,7 +2,8 @@
 #define BATTLE_OF_KINMEN_STATE_H
 
 struct State {
-    inline static int start = 0;
+    inline static bool serverReady = false;
+    inline static bool clientReady = false;
 };
 
 #endif //BATTLE_OF_KINMEN_STATE_H

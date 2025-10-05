@@ -23,7 +23,6 @@ add_executable(Battle_of_Kinmen
         server.h
         tcp_socket.h
         tcp_socket.cpp
-        client_example.cpp
         basemap.h
         basemap.cpp
         army.h

@@ -1,16 +1,17 @@
 #ifndef UNTITLED_TEXT_TEXTURE_H
 #define UNTITLED_TEXT_TEXTURE_H
 
-#include "base.h"
+#include <SDL3_ttf/SDL_ttf.h>
+
 #include "data.h"
 
 struct TextTexture {
-    SDL_Texture* texture;
+    SDL_Texture* texture{};
     FSize size{};
 
-    TextTexture(TTF_Font *font, const char *text, SDL_Color color);
-
     ~TextTexture() {SDL_DestroyTexture(texture);}
+
+    void init(TTF_Font *font, const char *text, SDL_Color color);
 
     void draw(Rect rect) const;
 };
