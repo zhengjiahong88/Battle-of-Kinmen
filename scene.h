@@ -1,37 +1,68 @@
 #ifndef UNTITLED_SCENE_H
 #define UNTITLED_SCENE_H
 
+#include <SDL3_image/SDL_image.h>
+#include <memory>
+
+#include "base.h"
 #include "buttons.h"
+#include "Basemap.h"
+#include "toggle.h"
 
 struct Scene {
+    explicit Scene() = default;
     virtual ~Scene() = default;
-    [[nodiscard]] virtual bool handle(const SDL_Event& e) = 0;
-    virtual void draw() const = 0;
+    virtual void handle() {}
+    virtual void draw() const {}
 };
 
-struct MainMenu final : Scene {
-    SDL_Renderer* renderer;
+struct Menu final : Scene {
+    Single single;
+    Create create;
+    Join join;
+    Quit quit;
+    Button* buttonsK[4] = { &single, &create, &join, &quit };
     Buttons buttons;
     FSize size{};
+    TextTexture texture;
+
+    explicit Menu();
+
+    void handle() override { buttons.handle(); }
+
+    void draw() const override;
+};
+
+struct Field final : Scene {
+    const char* k[2] = {"準備完畢", "取消"};
+    Toggle toggle;
+    SDL_Surface* surface;
     SDL_Texture* texture;
-    const char* k[4] = { "單人遊戲", "創建房間", "加入房間", "退出遊戲" };
-    explicit MainMenu(SDL_Renderer* renderer) : renderer(renderer), buttons( { { 640, 360 }, { 640, 90 } }, 180, 4, k, renderer) { texture = createTextTexture(size, renderer, { 255, 255, 255, 255 }, "金門保衛戰", 120); }
-    ~MainMenu() override { SDL_DestroyTexture(texture); }
-    [[nodiscard]] bool handle(const SDL_Event& e) override {
-        switch (buttons.handle(e)) {
-            case 0: SDL_Log("單人遊戲"); break;
-            case 1: SDL_Log("創建房間"); break;
-            case 2: SDL_Log("加入房間"); break;
-            case 3: return false;
-            default: ;
-        }
-        return true;
+    // Basemap terrain;
+    bool paint = false;
+
+    explicit Field() : toggle( { { 1360, 1000 }, { 280, 40 } }, k) {
+        surface = IMG_Load("assets/basemap.png");
+        texture = SDL_CreateTextureFromSurface(Base::renderer, surface);
+        SDL_DestroySurface(surface);
     }
 
-    void draw() const override {
-        drawTextTexture(renderer, texture, size, { { 0, 0 }, { 1920, 360 } });
-        buttons.draw();
-    }
+    ~Field() override { SDL_DestroyTexture(texture); }
+
+    void handle() override { toggle.handle(); }
+
+    void draw() const override;
+};
+
+struct SceneBase {
+    static std::unique_ptr<Menu> menu;
+    static std::unique_ptr<Field> field;
+    inline static Scene* scene;
+
+    static void init();
+
+    static void menuStart()  { scene = menu.get(); }
+    static void fieldStart() { scene = field.get(); }
 };
 
 #endif //UNTITLED_SCENE_H

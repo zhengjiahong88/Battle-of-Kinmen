@@ -1,6 +1,4 @@
-#include <SDL3_ttf/SDL_ttf.h>
-#include <iostream>
-
+#include "base.h"
 #include "scene.h"
 
 #define WIDTH 1920
@@ -8,35 +6,18 @@
 
 int main()
 {
-    printf("Hello World\n");
-    SDL_Init(SDL_INIT_VIDEO);
-    TTF_Init();
+    Base base;
+    SceneBase::init();
 
-    SDL_Log("Hello World");
-
-    SDL_Window* window = SDL_CreateWindow("金門保衛戰", WIDTH, HEIGHT, 0);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);
-
-    MainMenu mainMenu(renderer);
-
-    Scene* now = &mainMenu;
-
-    bool run = true;
-    while (run)
+    while (Base::run)
     {
-        SDL_Event e;
-        while (SDL_PollEvent(&e))
-        {
-            run = now->handle(e);
-            if (e.type == SDL_EVENT_QUIT) run = false;
+        while (SDL_PollEvent(&Base::event)) {
+            if (Base::event.type == SDL_EVENT_QUIT) Base::run = false;
+            SceneBase::scene->handle();
         }
-        now->draw();
-        SDL_RenderPresent(renderer);
+        SceneBase::scene->draw();
+        SDL_RenderPresent(Base::renderer);
         SDL_Delay(25);
     }
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    TTF_Quit();
-    SDL_Quit();
     return 0;
 }
