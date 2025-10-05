@@ -1,6 +1,7 @@
 #include <SDL3_ttf/SDL_ttf.h>
 
 #include "toggle.h"
+#include "basemap.h"
 
 Toggle::Toggle(const Rect rect, const char *texts[2]) : rect(rect), texts(texts) {
     TTF_Font *font = TTF_OpenFont("assets/standard.ttf", rect.size.h);
@@ -9,9 +10,9 @@ Toggle::Toggle(const Rect rect, const char *texts[2]) : rect(rect), texts(texts)
 }
 
 bool Toggle::handle() {
-    touch = rect.inRange();
+    touch = Basemap::touched(rect.toFRect());
     down = Base::event.type == SDL_EVENT_MOUSE_BUTTON_DOWN;
-    if (Base::event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+    if (touch && Base::event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
         index = !index;
         return true;
     }

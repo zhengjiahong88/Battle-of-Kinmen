@@ -17,10 +17,9 @@ add_executable(Battle_of_Kinmen
         main.cpp
         buttons.h
         data.h
-        text_texture.h
+        texture.h
         scene.h
-        text_texture.cpp
-        server.h
+        texture.cpp
         tcp_socket.h
         tcp_socket.cpp
         basemap.h

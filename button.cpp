@@ -10,6 +10,7 @@ void Create::handle() {
     Base::id = 1;
     SceneBase::fieldStart();
 
+    return;
     // 建立伺服器，監聽 8080 埠
     TCPSocket server(8080, "127.0.0.1");
 
@@ -36,6 +37,7 @@ void Create::handle() {
 void Join::handle() {
     Base::id = 2;
     SceneBase::fieldStart();
+    return;
     TCPSocket client;
 
     if (!client.is_valid()) SDL_Log("無法建立客戶端");

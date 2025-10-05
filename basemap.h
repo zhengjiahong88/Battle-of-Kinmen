@@ -30,6 +30,7 @@ struct Basemap
 	static MapPos toMap(FPos pos);
 
 	static bool inRange(const MapPos p) { return p.x < WIDTH && p.y < HEIGHT; }
+	static bool touched(const SDL_FRect r){ return r.x < Base::event.motion.x && Base::event.motion.x < r.x + r.w && r.y < Base::event.motion.y && Base::event.motion.y < r.y + r.h; }
 
 	static FPos abs(const FPos p) { return {std::abs(p.x), std::abs(p.y)}; }
 };

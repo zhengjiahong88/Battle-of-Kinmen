@@ -2,7 +2,7 @@
 #define BATTLE_OF_KINMEN_TOGGLE_H
 
 #include "data.h"
-#include "text_texture.h"
+#include "texture.h"
 
 struct Toggle {
     Rect rect;

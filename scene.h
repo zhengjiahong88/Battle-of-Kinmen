@@ -4,9 +4,8 @@
 #include <SDL3_image/SDL_image.h>
 #include <memory>
 
-#include "base.h"
 #include "buttons.h"
-#include "Basemap.h"
+#include "basemap.h"
 #include "toggle.h"
 
 struct Scene {
@@ -21,31 +20,36 @@ struct Menu final : Scene {
     Create create;
     Join join;
     Quit quit;
-    Button* buttonsK[4] = { &single, &create, &join, &quit };
+    SDL_Texture *hu, *li;
+    TextTexture title, hint, hut, lit;
+    Button *buttonsK[4] = { &single, &create, &join, &quit };
     Buttons buttons;
     FSize size{};
-    TextTexture texture;
+    SDL_FRect HU_RECT{384, 312, 384, 512};
+    SDL_FRect LI_RECT{1152, 312, 384, 512};
 
     explicit Menu();
 
-    void handle() override { buttons.handle(); }
+    ~Menu() override;
+
+    void handle() override;
 
     void draw() const override;
 };
 
 struct Field final : Scene {
+    Add add;
+    Sub sub;
+    Button *buttonsK[2] = {&add, &sub};
+    Buttons buttons;
     const char* k[2] = {"準備完畢", "取消"};
     Toggle toggle;
-    SDL_Surface* surface;
     SDL_Texture* texture;
+    TextTexture key, value;
     // Basemap terrain;
     bool paint = false;
 
-    explicit Field() : toggle( { { 1360, 1000 }, { 280, 40 } }, k) {
-        surface = IMG_Load("assets/basemap.png");
-        texture = SDL_CreateTextureFromSurface(Base::renderer, surface);
-        SDL_DestroySurface(surface);
-    }
+    explicit Field();
 
     ~Field() override { SDL_DestroyTexture(texture); }
 

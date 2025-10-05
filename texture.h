@@ -6,7 +6,7 @@
 #include "data.h"
 
 struct TextTexture {
-    SDL_Texture* texture{};
+    SDL_Texture* texture = nullptr;
     FSize size{};
 
     ~TextTexture() {SDL_DestroyTexture(texture);}
@@ -15,5 +15,7 @@ struct TextTexture {
 
     void draw(Rect rect) const;
 };
+
+SDL_Texture *createPicture(const char *name);
 
 #endif //UNTITLED_TEXT_TEXTURE_H

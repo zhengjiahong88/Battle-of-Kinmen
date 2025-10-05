@@ -4,23 +4,23 @@
 #include "base.h"
 #include "data.h"
 #include "button.h"
-#include "text_texture.h"
+#include "texture.h"
 
 struct Buttons
 {
     Rect rect;
-    Uint16 gap;
+    Size gap;
     Uint8 num;
     Button** buttons;
     bool down = false;
     TextTexture* textures{};
     Uint8 level = 255;
 
-    Buttons(Rect rect, Uint16 gap, Uint8 num, Button* buttons[]);
+    Buttons(Rect rect, Size gap, Uint8 num, Button* buttons[]);
 
     ~Buttons() { delete[] textures; }
 
-    void handle();
+    bool handle();
 
     void draw() const;
 };
