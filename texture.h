@@ -1,7 +1,7 @@
 #ifndef UNTITLED_TEXT_TEXTURE_H
 #define UNTITLED_TEXT_TEXTURE_H
 
-#include <SDL3_ttf/SDL_ttf.h>
+#include <string>
 
 #include "data.h"
 
@@ -11,11 +11,19 @@ struct TextTexture {
 
     ~TextTexture() {SDL_DestroyTexture(texture);}
 
-    void init(TTF_Font *font, const char *text, SDL_Color color);
+    void init(const std::string& text, Uint16 s, Uint8 color);
 
-    void draw(Rect rect) const;
+    void draw(SDL_FRect rect) const;
 };
 
-SDL_Texture *createPicture(const char *name);
+struct ImageTexture {
+    SDL_Texture* texture = nullptr;
+
+    ~ImageTexture() {SDL_DestroyTexture(texture);}
+
+    void init(const std::string& path);
+
+    void draw(SDL_FRect rect) const;
+};
 
 #endif //UNTITLED_TEXT_TEXTURE_H

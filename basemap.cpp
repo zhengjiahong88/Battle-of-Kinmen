@@ -48,24 +48,3 @@ Basemap::Basemap()
 	};
 	for (int y = 0; y < HEIGHT; y++) for (int x = 0; x < WIDTH; x++) terrain[y][x].symbol = symbols[y][x];
 }
-
-FPos Basemap::toF(const MapPos index) {
-	FPos pos = index * GAP + ORIGIN;
-	if (index.x % 2) pos.y += GAP.h / 2;
-	return pos;
-}
-
-MapPos Basemap::toMap(const FPos pos) {
-	FPos index = pos - ORIGIN;
-	MapPos xy{};
-	xy.x = roundf(index.x / GAP.w);
-	if (xy.x % 2) index.y -= GAP.h / 2;
-	xy.y = roundf(index.y / GAP.h);
-	const FPos center = toF(xy);
-	FPos rel = abs(pos - center);
-	if (sqrtf(3) * rel.x + rel.y > sqrtf(3) * KM) {
-		xy.y += xy.x % 2 - (pos.y < center.y);
-		xy.x += pos.x < center.x ? -1 : 1;
-	}
-	return xy;
-}

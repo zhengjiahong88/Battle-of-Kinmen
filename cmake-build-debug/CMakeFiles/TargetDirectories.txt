@@ -1,0 +1,3 @@
+D:/CLion/Battle of Kinmen/cmake-build-debug/CMakeFiles/Battle_of_Kinmen.dir
+D:/CLion/Battle of Kinmen/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/CLion/Battle of Kinmen/cmake-build-debug/CMakeFiles/rebuild_cache.dir

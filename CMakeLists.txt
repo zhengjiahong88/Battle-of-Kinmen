@@ -15,10 +15,9 @@ find_package(SDL3_image REQUIRED CONFIG)
 
 add_executable(Battle_of_Kinmen
         main.cpp
-        buttons.h
+        button.h
         data.h
         texture.h
-        scene.h
         texture.cpp
         tcp_socket.h
         tcp_socket.cpp
@@ -27,13 +26,12 @@ add_executable(Battle_of_Kinmen
         army.h
         state.h
         base.h
-        scene.cpp
         base.cpp
-        buttons.cpp
-        button.h
         button.cpp
-        toggle.h
-        toggle.cpp
+        commander.cpp
+        commander.h
+        data.cpp
+        army.cpp
 )
 
 target_link_libraries(Battle_of_Kinmen PRIVATE SDL3::SDL3 SDL3_ttf::SDL3_ttf SDL3_image::SDL3_image ws2_32)
