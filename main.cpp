@@ -21,24 +21,18 @@ int main()
     {
         while (SDL_PollEvent(&Base::event)) {
             if (Base::event.type == SDL_EVENT_QUIT) Base::run = false;
-            if (commander) {
-                commander->handle();
-            }
-            else {
+            if (!commander) {
                 if (hu.headshot.handle()) commander = &hu;
                 if (li.headshot.handle()) commander = &li;
-            }
+            } else if (!Base::start) commander->handle();
         }
         basemap.draw({0, 0, WIDTH, HEIGHT});
         title.draw({1080, 60, 840, 120});
-        if (commander) {
-            commander->draw();
-        }
-        else {
+        if (!commander) {
             hint.draw({1080, 240, 840, 40});
             hu.headshot.draw();
             li.headshot.draw();
-        }
+        } else if (!Base::start) commander->draw();
         SDL_RenderPresent(Base::renderer);
         SDL_Delay(25);
     }

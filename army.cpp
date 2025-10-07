@@ -1,10 +1,11 @@
 #include "army.h"
 
-void Army::init(const std::string& name, const std::string& file, const FPos p) {
+void Army::init(const std::string& name, const std::string& a, const FPos p) {
     pos = p;
     target = p;
     icon.init(name, together(p - size / 2, size), 30, 255);
-    icon.initImage(file);
+    icon.initImage("army/" + a);
+    arms = a;
 }
 
 void Army::move() {

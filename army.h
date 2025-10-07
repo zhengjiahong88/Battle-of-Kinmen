@@ -8,8 +8,10 @@ struct Army {
     ImageButton icon;
     FPos pos{};
     FPos target{};
+    std::string arms;
+    int hp = 1728, fire = 144, protection = 12;
 
-    void init(const std::string& name, const std::string& file, FPos p);
+    void init(const std::string& name, const std::string& arms, FPos p);
     void move();
 };
 

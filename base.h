@@ -10,7 +10,7 @@ struct Base {
     inline static SDL_Window* window = nullptr;
     inline static SDL_Renderer* renderer = nullptr;
     inline static SDL_Event event{};
-    inline static int id = 0;
+    inline static bool start = false;
 
     Base();
 

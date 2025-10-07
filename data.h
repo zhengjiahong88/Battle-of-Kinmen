@@ -2,6 +2,7 @@
 #define UNTITLED_DATA_H
 
 #include <cmath>
+#include <string>
 
 #include "base.h"
 
@@ -57,5 +58,7 @@ static bool inRange(const MapPos p) { return p.x < WIDTH && p.y < HEIGHT; }
 static FPos abs(const FPos p) { return {std::abs(p.x), std::abs(p.y)}; }
 
 static float length(const FPos p) { return std::sqrt(p.x * p.x + p.y * p.y); }
+
+static std::string to_string(const MapPos pos) { return std::to_string(pos.x) + " " + std::to_string(pos.y); }
 
 #endif //UNTITLED_DATA_H

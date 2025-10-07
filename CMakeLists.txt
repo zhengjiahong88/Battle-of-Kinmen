@@ -24,7 +24,6 @@ add_executable(Battle_of_Kinmen
         basemap.h
         basemap.cpp
         army.h
-        state.h
         base.h
         base.cpp
         button.cpp
