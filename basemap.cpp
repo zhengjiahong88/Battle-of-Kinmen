@@ -1,7 +1,5 @@
 #define USE_MATH_DEFINES
 
-#include <cmath>
-
 #include "basemap.h"
 
 Basemap::Basemap()
@@ -46,5 +44,5 @@ Basemap::Basemap()
 		"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
 		"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
 	};
-	for (int y = 0; y < HEIGHT; y++) for (int x = 0; x < WIDTH; x++) terrain[y][x].symbol = symbols[y][x];
+	for (int y = 0; y < HEIGHT; y++) for (int x = 0; x < WIDTH; x++) terrain[y][x] = symbols[y][x];
 }
